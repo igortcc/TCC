@@ -1,0 +1,121 @@
+header{
+	background-color: #1b4f72;
+	color: white;
+}
+
+header ul{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+header a{
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+}
+
+header form {
+	display: flex;
+}
+
+header input {
+	margin: 10px;
+
+}
+header li {
+	margin: 0 15px;
+}
+
+header a:hover {
+	text-decoration: underline;
+}
+
+nav {
+	background-color: #21618c;
+
+}
+
+nav a {
+	text-decoration: none;
+	color: white;
+}
+
+nav ul {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	list-style-type: none;
+	margin: 0 15px;
+	padding: 0;
+}
+nav li:hover {
+	border:  2px solid black;
+	font-weight: bold;
+}
+
+.recomendações-personalizadas {
+	margin-top: 20px;
+	display: flex;
+	justify-content: space-between;
+	text-align: center;
+}
+.recomendações {
+	background-color: white;
+}
+.recomendações img {
+	height: 250px;
+	width: 180px;
+}
+section {
+	margin: 0;
+	padding: 20px;
+	background-color: whitesmoke;
+}
+footer {
+	margin: 0;
+	text-align: center;
+	padding: 20px;
+	padding-bottom: 200px;
+	background-color: black;
+	color: white;
+}
+
+footer ul a {
+	color: white;
+	text-decoration: none;
+}
+
+footer ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+footer ul li {
+	display: inline;
+	position: relative;
+
+}
+
+footer ul li::after{
+	content: '|';
+	color: white;
+	margin: 5px;
+}
+
+footer ul li:last-child::after{
+	content: '';
+}
+footer span {
+	display: block;
+	margin-top: 10px;
+	font-size: 14px;
+}
+
+footer a:hover {
+	text-decoration: underline;
+}
