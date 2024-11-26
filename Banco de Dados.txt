@@ -1,0 +1,95 @@
+CREATE TABLE categorias (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL
+);
+
+-- Criando a tabela locais
+CREATE TABLE locais (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    endereco VARCHAR(255),
+    capacidade INT
+);
+
+-- Criando a tabela organizadores
+CREATE TABLE organizadores (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    email VARCHAR(255),
+    telefone VARCHAR(20)
+);
+
+-- Criando a tabela eventos
+CREATE TABLE eventos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    descricao TEXT,
+    data_inicio DATETIME NOT NULL,
+    data_fim DATETIME NOT NULL,
+    categoria_id INT,
+    local_id INT,
+    organizador_id INT,
+    CONSTRAINT fk_categoria FOREIGN KEY (categoria_id) REFERENCES categorias(id),
+    CONSTRAINT fk_local FOREIGN KEY (local_id) REFERENCES locais(id),
+    CONSTRAINT fk_organizador FOREIGN KEY (organizador_id) REFERENCES organizadores(id)
+);
+
+-- Criando a tabela participantes
+CREATE TABLE participantes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    telefone VARCHAR(20),
+    evento_id INT,
+    CONSTRAINT fk_evento FOREIGN KEY (evento_id) REFERENCES eventos(id)
+);
+
+-- Criando a tabela ingressos
+CREATE TABLE ingressos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    evento_id INT,
+    tipo VARCHAR(100),
+    preco DECIMAL(10, 2),
+    quantidade INT,
+    CONSTRAINT fk_evento_ingresso FOREIGN KEY (evento_id) REFERENCES eventos(id)
+);
+
+-- Criando a tabela inscricoes
+CREATE TABLE inscricoes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    participante_id INT,
+    ingresso_id INT,
+    data_compra DATETIME,
+    CONSTRAINT fk_participante FOREIGN KEY (participante_id) REFERENCES participantes(id),
+    CONSTRAINT fk_ingresso FOREIGN KEY (ingresso_id) REFERENCES ingressos(id)
+);
+
+
+-- Inserindo categorias
+INSERT INTO categorias (nome) VALUES ('Conferência');
+INSERT INTO categorias (nome) VALUES ('Workshop');
+INSERT INTO categorias (nome) VALUES ('Concerto');
+
+-- Inserindo locais
+INSERT INTO locais (nome, endereco, capacidade) VALUES ('Centro de Convenções', 'Rua das Flores, 123', 500);
+INSERT INTO locais (nome, endereco, capacidade) VALUES ('Auditório ABC', 'Avenida Central, 456', 200);
+
+-- Inserindo organizadores
+INSERT INTO organizadores (nome, email, telefone) VALUES ('João da Silva', 'joao@email.com', '1234-5678');
+INSERT INTO organizadores (nome, email, telefone) VALUES ('Maria Oliveira', 'maria@email.com', '8765-4321');
+
+-- Inserindo eventos
+INSERT INTO eventos (nome, descricao, data_inicio, data_fim, categoria_id, local_id, organizador_id) 
+VALUES ('Conferência de Tecnologia', 'Evento sobre inovação tecnológica', '2024-12-10 09:00', '2024-12-10 18:00', 1, 1, 1);
+
+-- Inserindo participantes
+INSERT INTO participantes (nome, email, telefone, evento_id) 
+VALUES ('Carlos Souza', 'carlos@email.com', '9876-5432', 1);
+
+-- Inserindo ingressos
+INSERT INTO ingressos (evento_id, tipo, preco, quantidade) 
+VALUES (1, 'Entrada Geral', 100.00, 500);
+
+-- Inserindo inscrições
+INSERT INTO inscricoes (participante_id, ingresso_id, data_compra) 
+VALUES (1, 1, '2024-11-20 14:00');
